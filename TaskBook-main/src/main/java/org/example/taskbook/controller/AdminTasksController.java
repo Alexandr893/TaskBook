@@ -1,5 +1,6 @@
 package org.example.taskbook.controller;
 
+
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.AllArgsConstructor;
 import org.example.taskbook.dao.entity.Task;
@@ -29,11 +30,13 @@ public class AdminTasksController {
 
     private AdminTasksService adminTasksService;
 
+
     @Operation(summary = "Создать задачу", description = "Доступно только админу")
     @PostMapping("/create")
     public ResponseEntity<?> createTask(@RequestBody TaskDto taskDto) {
         return adminTasksService.createTask(taskDto);
     }
+
 
     @Operation(summary = "Обновить задачу", description = "Доступно только админу")
     @PutMapping("/{id}")
@@ -41,11 +44,13 @@ public class AdminTasksController {
         return adminTasksService.updateTask(id, taskDto);
     }
 
+
     @Operation(summary = "Удалить задачу", description = "Доступно только админу")
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteTask(@PathVariable Long id) {
         return adminTasksService.deleteTask(id);
     }
+
 
     @Operation(summary = "Обновить статус задачи", description = "Доступно только админу")
     @PutMapping("/{id}/status")
@@ -53,17 +58,20 @@ public class AdminTasksController {
         return adminTasksService.updateTaskStatus(id, newStatus);
     }
 
+
     @Operation(summary = "Обновить приоритет задачи", description = "Доступно только админу")
     @PutMapping("/{id}/priority")
     public ResponseEntity<?> updateTaskPriority(@PathVariable Long id, @RequestParam Priority newPriority) {
         return adminTasksService.updateTaskPriority(id, newPriority);
     }
 
+
     @Operation(summary = "Добавить комментарий", description = "Доступно только админу")
     @PostMapping("/{taskId}/comments")
     public ResponseEntity<?> addComment(@PathVariable Long taskId, @RequestBody CommentDto commentDto) {
         return adminTasksService.addCommentToTask(taskId, commentDto);
     }
+
 
     @Operation(summary = "Получить все задачи", description = "Доступно только админу")
     @GetMapping("/")
@@ -72,6 +80,7 @@ public class AdminTasksController {
     }
 
     // Получение задач по идентификатору автора
+
 
     @Operation(summary = "Получить задачу по идентификатору автора", description = "Доступно только админу")
     @GetMapping("/author/{authorId}")
@@ -83,6 +92,7 @@ public class AdminTasksController {
         Page<Task> page = adminTasksService.getTasksByAuthor(authorId, pageable);
         return assembler.toModel(page);
     }
+
     @Operation(summary = "Получить задачу по идентификатору исполнителя", description = "Доступно только админу")
     @GetMapping("/assignee/{assigneeId}")
     public PagedModel<EntityModel<Task>> getTasksByAssignee(
