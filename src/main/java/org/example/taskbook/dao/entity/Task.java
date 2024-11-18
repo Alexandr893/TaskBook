@@ -1,5 +1,6 @@
 package org.example.taskbook.dao.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -27,10 +28,12 @@ public class Task implements Serializable {
     @Enumerated(EnumType.STRING)
     private Priority priority;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "author_id")
     private User author;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "assignee_id")
     private User assignee;

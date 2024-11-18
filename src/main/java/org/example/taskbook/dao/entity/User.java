@@ -1,5 +1,6 @@
 package org.example.taskbook.dao.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,14 +19,19 @@ import java.util.Set;
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
     private String firstName;
     private String lastName;
     private String email;
     private String password;
     private String role;
+
+
+    @JsonIgnore
     @OneToMany(mappedBy = "author")
     private Set<Task> createdTasks;
+
+    @JsonIgnore
     @OneToMany(mappedBy = "assignee")
     private Set<Task> assignedTasks;
     @Override

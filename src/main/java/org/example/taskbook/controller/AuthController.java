@@ -4,10 +4,7 @@ import lombok.AllArgsConstructor;
 import org.example.taskbook.dto.ReqResDto;
 import org.example.taskbook.service.AuthService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @AllArgsConstructor
@@ -30,5 +27,6 @@ public class AuthController {
     public ResponseEntity<ReqResDto> refreshToken(@RequestBody ReqResDto refreshTokenRequest){
         return ResponseEntity.ok(authService.refreshToken(refreshTokenRequest));
     }
+
 
 }
